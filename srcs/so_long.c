@@ -6,22 +6,28 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:07:18 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/10 17:56:15 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:54:53 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	/* void	*mlx;
-	void	*mlx_win;
+	// void	*mlx;
+	// void	*mlx_win;
+	int		len;
 
-	mlx = mlx_init();
+	/* mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "so_long");
+	mlx_pixel_put(mlx, mlx_win, 128, 128, 0xFF0000);
 	mlx_loop(mlx); */
 
-	int fd = open("test.txt", O_RDONLY);
-	while (fd)
-	get_next_line()
+	if (ac != 2 || ft_strlen(av[1]) < 5)
+		return (write(2, "Error\n", 6));
+	len = ft_strlen(av[1]);
+	if (ft_strncmp(".ber", av[1] + ft_strlen(av[1]) - 4, 4))
+		return (write(2, "Error\n", 6));
+	map_parsing(av[1]);
 }
+
