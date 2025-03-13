@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/12 15:08:56 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:39:19 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ typedef struct s_map
 	int		width;
 	int		height;
 	int		walls;
+	int		exit;
+	int		collectible;
+	int		player;
 }	t_map;
 
 typedef struct s_so_long

@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:49:53 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/12 16:05:11 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:05:16 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	map_parsing(char *av, t_map *map)
 		return (close(map_fd));
 	row_checker(map_fd, &map);
 	if (map->height < 3 || map->width < 3)
-		ft_error(3);
-	map_checker(&map); // largura = 30 e altura = 17
+		ft_error(3); // 3 = map dont have enough space
+	map_checker(&map, map_fd); // largura = 30 e altura = 16 (maximos)
 	close(map_fd);
 }
 
@@ -34,7 +34,7 @@ void	row_checker(int map_fd, t_map *map)
 	i = 0;
 	row = get_next_line(map_fd);
 	if (!row)
-		ft_error(1);
+		ft_error(1); // 1 = the map file dont have nothing
 	map->width = ft_strlen(row);
 	map->height = 1;
 	free(row);
@@ -43,14 +43,32 @@ void	row_checker(int map_fd, t_map *map)
 		if (ft_strlen(row) != map->width)
 		{
 			free(row);
-			ft_error(2);
+			ft_error(2); // 2 = the map is not retangular
 		}
 		map->height++;
 		free(row);
 	}
 }
 
-void	map_checker(t_map *map)
+void	map_checker(int map_fd, t_map *map)
+{
+	int i;
+
+	i = 0;
+	map->map = malloc(map->height * sizeof(char *));
+	while (i <= map->height)
+	{
+		map->map[i] = ft_strdup(get_next_line(map_fd));
+		if (ft_strncmp("1", map->map[0], strlen(map->width)))
+			ft_error(4);// 4 = map not enclosed by walls
+		else if (map->map[i][0] != '1' || map->map[i][map->width] != '1')
+			ft_error(4);
+		check_assets(map->map);
+		i++;
+	}
+}
+
+void	check_assets(char *row)
 {
 	
 }
