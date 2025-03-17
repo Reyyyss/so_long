@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:49:53 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/13 13:05:16 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:00:12 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,27 @@ void	map_checker(int map_fd, t_map *map)
 			ft_error(4);// 4 = map not enclosed by walls
 		else if (map->map[i][0] != '1' || map->map[i][map->width] != '1')
 			ft_error(4);
-		check_assets(map->map);
+		else if (ft_strncmp("1", map->map[map->height], strlen(map->width)))
+			ft_error(4);
+		check_assets(map->map[i], &map);
 		i++;
 	}
 }
 
-void	check_assets(char *row)
+void	check_assets(char *row, t_map *map)
 {
-	
+	int	i;
+
+	i = 0;
+	while (i <= map->width)
+	{
+		if (row[i] == 'p')
+			map->player++;
+		else if (row[i] == 'e')
+			map->exit++;
+		else if (row[i] == 'c')
+			map->collectible++;
+		i++;
+	}
+	if ()
 }
