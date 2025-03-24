@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:49:53 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/19 20:13:46 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/03/24 16:22:33 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,17 @@ void	map_parsing(char *av, t_map *map, t_assets *assets)
 {
 	int		map_fd;
 
-	map_fd = open(av[1], O_RDONLY);
+	map_fd = open(av, O_RDONLY);
 	if (map_fd < 3)
-		return (close(map_fd));
+	{
+		close(map_fd);
+		return ();
+	}
 	row_checker(map_fd, &map);
 	if (map->height < 3 || map->width < 3)
 		ft_error(3); // 3 = map dont have enough space
 	map_checker(&map, map_fd, &assets); // largura = 30 e altura = 16 (maximos)
-	flood_fill(&map, );
+	flood_fill(&map, assets, assets->player->x, assets->player->y);
 	close(map_fd);
 }
 

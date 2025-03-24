@@ -6,13 +6,13 @@
 #    By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 11:43:27 by hcarrasq          #+#    #+#              #
-#    Updated: 2025/03/10 12:08:29 by hcarrasq         ###   ########.fr        #
+#    Updated: 2025/03/24 16:15:57 by hcarrasq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCS_FILES = so_long.c
+SRCS_FILES = so_long.c parsing.c flood_fill.c utils.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 

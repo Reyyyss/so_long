@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 17:42:51 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/19 17:11:58 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/03/24 16:11:04 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void floodfill(t_map *map, t_assets *assets, int x, int y) 
+void floodfill(t_map *map, t_assets *assets, int x, int y)
 {
-    if (x < 0 || y < 0 || map->map[y][x] == '1' || map->map[y][x] == 'W')
-        return;
-    map->map[y][x] == 'W';
-    //preciso de meter uma cena na struct de collectible found e exit reachable
-    //e se a nao conseguir chegar a saida dar erro
-    //se as collectible founds for diferente das collectibles existentes dar erro
-    floodfill(x + 1, y);
-    floodfill(x - 1, y);
-    floodfill(x, y + 1);
-    floodfill(x, y - 1);
+	if (x < 0 || y < 0 || map->map[y][x] == '1' || map->map[y][x] == 'W')
+		return;
+	map->map[y][x] = 'W';
+	if (map->map[y][x] == 'C')
+		assets->collectibles_found++;
+	if (map->map[y][x] == 'E')
+		assets->exit_reachable = 1;
+	floodfill(map, assets, x + 1, y);
+	floodfill(map, assets, x - 1, y);
+	floodfill(map, assets, x, y + 1);
+	floodfill(map, assets, x, y - 1);
 }
