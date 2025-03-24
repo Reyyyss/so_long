@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:49:53 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/17 18:00:12 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/03/19 20:13:46 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	map_parsing(char *av, t_map *map)
+void	map_parsing(char *av, t_map *map, t_assets *assets)
 {
 	int		map_fd;
 
@@ -22,7 +22,8 @@ void	map_parsing(char *av, t_map *map)
 	row_checker(map_fd, &map);
 	if (map->height < 3 || map->width < 3)
 		ft_error(3); // 3 = map dont have enough space
-	map_checker(&map, map_fd); // largura = 30 e altura = 16 (maximos)
+	map_checker(&map, map_fd, &assets); // largura = 30 e altura = 16 (maximos)
+	flood_fill(&map, );
 	close(map_fd);
 }
 
@@ -34,7 +35,7 @@ void	row_checker(int map_fd, t_map *map)
 	i = 0;
 	row = get_next_line(map_fd);
 	if (!row)
-		ft_error(1); // 1 = the map file dont have nothing
+		ft_error(1); // 1 = the map file has nothing
 	map->width = ft_strlen(row);
 	map->height = 1;
 	free(row);
@@ -50,40 +51,57 @@ void	row_checker(int map_fd, t_map *map)
 	}
 }
 
-void	map_checker(int map_fd, t_map *map)
+void	map_checker(int map_fd, t_map *map, t_assets *assets)
 {
-	int i;
+	int y;
 
-	i = 0;
+	y = 0;
 	map->map = malloc(map->height * sizeof(char *));
-	while (i <= map->height)
+	while (y <= map->height)
 	{
-		map->map[i] = ft_strdup(get_next_line(map_fd));
+		map->map[y] = ft_strdup(get_next_line(map_fd));
 		if (ft_strncmp("1", map->map[0], strlen(map->width)))
 			ft_error(4);// 4 = map not enclosed by walls
-		else if (map->map[i][0] != '1' || map->map[i][map->width] != '1')
+		else if (map->map[y][0] != '1' || map->map[y][map->width] != '1')
 			ft_error(4);
 		else if (ft_strncmp("1", map->map[map->height], strlen(map->width)))
 			ft_error(4);
-		check_assets(map->map[i], &map);
-		i++;
+		check_assets(map->map[y], &map, y, &assets);
+		y++;
 	}
 }
 
-void	check_assets(char *row, t_map *map)
+void	check_assets(char *row, t_map *map, int y, t_assets *assets)
 {
-	int	i;
+	int	x;
 
-	i = 0;
-	while (i <= map->width)
+	x = 0;
+	while (x <= map->width)
 	{
-		if (row[i] == 'p')
+		if (row[x] == 'p')
+		{
+			//increment_assets(&map, &assets, x, y);
+			assets->player->x = x;
+			assets->player->y = y;
 			map->player++;
-		else if (row[i] == 'e')
+		}
+		else if (row[x] == 'e')
+		{
+			assets->exit->y = y;
+			assets->exit->x = x;
 			map->exit++;
-		else if (row[i] == 'c')
+		}
+		else if (row[x] == 'c')
+		{
+			//se for necessario alocar memoria para o array de coordenadas porque os collectibles serao mais que um
 			map->collectible++;
-		i++;
+		}
+		x++;
 	}
-	if ()
+	if (map->player > 1)
+		ft_error(5);
+	else if (map->exit > 1)
+		ft_error(6);
+	else if (map->collectible < 1)
+		ft_error(7);
 }

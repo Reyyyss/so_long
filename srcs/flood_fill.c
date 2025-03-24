@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 17:42:51 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/17 17:50:22 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:11:58 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Flood fill function to check if player can collect all collectibles
-void floodfill(int grid[ROWS][COLS], int x, int y, bool visited[ROWS][COLS]) {
-    // If the position is out of bounds or already visited, stop
-    if (!is_valid(x, y, grid) || visited[x][y]) {
+#include "so_long.h"
+
+void floodfill(t_map *map, t_assets *assets, int x, int y) 
+{
+    if (x < 0 || y < 0 || map->map[y][x] == '1' || map->map[y][x] == 'W')
         return;
-    }
-
-    // Mark this cell as visited
-    visited[x][y] = true;
-
-    // Explore 4 directions (down, up, right, left)
-    floodfill(grid, x + 1, y, visited); // Down
-    floodfill(grid, x - 1, y, visited); // Up
-    floodfill(grid, x, y + 1, visited); // Right
-    floodfill(grid, x, y - 1, visited); // Left
+    map->map[y][x] == 'W';
+    //preciso de meter uma cena na struct de collectible found e exit reachable
+    //e se a nao conseguir chegar a saida dar erro
+    //se as collectible founds for diferente das collectibles existentes dar erro
+    floodfill(x + 1, y);
+    floodfill(x - 1, y);
+    floodfill(x, y + 1);
+    floodfill(x, y - 1);
+}

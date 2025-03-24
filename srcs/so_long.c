@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:07:18 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/12 15:17:37 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/03/19 00:53:37 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	main(int ac, char **av)
 	len = ft_strlen(av[1]);
 	if (ft_strncmp(".ber", av[1] + ft_strlen(av[1]) - 4, 4))
 		return (write(2, "Error\n", 6));
-	map_parsing(av[1], &slong.map);
+	map_parsing(av[1], &slong.map, &slong.ass);
 }
 
