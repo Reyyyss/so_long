@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/24 16:46:55 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/03/24 20:29:37 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	map_checker(int map_fd, t_map *map, t_assets *assets);
 void	check_assets(char *row, t_map *map, int y, t_assets *assets);
 void	floodfill(t_map *map, t_assets *assets, int x, int y);
 void	ft_error(int panic);
-static void	*ft_free(char *str);
-increment_assets(t_map *map, t_assets *assets, int x, int y);
+void	*ft_free(char *str);
+void increment_assets(t_map *map, t_assets *assets, int x, int y);
 
 #endif
