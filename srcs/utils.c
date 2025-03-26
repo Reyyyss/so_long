@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:00:01 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/24 20:27:40 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/03/26 15:27:53 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,13 @@
 
 void	ft_error(int panic)
 {
-	ft_printf("Error\n");
+	ft_printf("Error: %i\n", panic);
 	//ft_free(row);
 	exit (panic);
 }
 
 void	*ft_free(char *str)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		free(str[i++]);
 	return (free(str), NULL);
 }
 
@@ -38,7 +33,7 @@ void increment_assets(t_map *map, t_assets *assets, int x, int y)
 	map->player++;
 }
 
-initialize_struct(t_so_long *slong)
+/* void	initialize_struct(t_so_long *slong)
 {
-	
-}
+	slong{0};
+} */

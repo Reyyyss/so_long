@@ -6,11 +6,11 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 17:42:51 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/24 16:11:04 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:48:02 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void floodfill(t_map *map, t_assets *assets, int x, int y)
 {

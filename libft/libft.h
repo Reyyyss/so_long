@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 13:15:17 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/02/03 17:49:59 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/03/26 15:41:19 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define UHEX "0123456789ABCDEF"
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 2
+# define BUFFER_SIZE 1
 # endif
 
 # include <stdlib.h>
