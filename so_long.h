@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/26 15:41:04 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/03/31 18:12:58 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,13 @@ typedef struct s_assets
 {
 	int	exit_reachable;
 	int	collectibles_found;
-	t_cords *exit;
-	t_cords *collectible;
 	t_cords *player;
 }	t_assets;
 
 typedef struct s_map
 {
 	char		**map;
+	int			map_fd;
 	int			error;
 	size_t		width;
 	size_t		height;
@@ -67,12 +66,14 @@ typedef struct s_so_long
 
 
 void	map_parsing(char *av, t_map *map, t_assets *assets);
-void	row_checker(int map_fd, t_map *map);
-void	map_checker(int map_fd, t_map *map, t_assets *assets);
-void	check_assets(char *row, t_map *map, int y, t_assets *assets);
+void	row_checker(t_map *map);
+void	map_checker(t_map *map, t_assets *assets);
+void	check_assets(t_map *map, t_assets *assets);
 void	floodfill(t_map *map, t_assets *assets, int x, int y);
 void	ft_error(int panic);
 void	*ft_free(char *str);
 void	increment_assets(t_map *map, t_assets *assets, int x, int y);
+int		ft_strcharcmp(const char s1, const char *s2, size_t n);
+void	map_copy(t_map *map);
 
 #endif
