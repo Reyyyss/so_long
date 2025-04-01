@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:49:53 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/31 17:52:51 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:04:56 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	map_parsing(char *av, t_map *map, t_assets *assets)
 	}
 	map->map_fd = open(av, O_RDONLY);
 	map_copy(map);
-	map_checker(map, assets); // largura = 30 e altura = 16 (maximos)
-	check_assets(map);
+	map_checker(map); // largura = 30 e altura = 16 (maximos)
+	check_assets(map, assets);
 	floodfill(map, assets, assets->player->x, assets->player->y);
 	ft_printf("%i", assets->collectibles_found);
 	close(map->map_fd);
@@ -65,7 +65,7 @@ void	row_checker(t_map *map)
 	close(map->map_fd);
 }
 
-void	map_checker(t_map *map, t_assets *assets)
+void	map_checker(t_map *map)
 {
 	size_t	y;
 
@@ -84,7 +84,7 @@ void	map_checker(t_map *map, t_assets *assets)
 	}
 }
 
-void	check_assets(t_map *map)
+void	check_assets(t_map *map, t_assets *assets)
 {
 	size_t	x;
 	size_t	y;
@@ -101,11 +101,7 @@ void	check_assets(t_map *map)
 			map->player++;
 		}
 		else if (map->map[y][x] == 'E')
-		{
-			assets->exit->y = y;
-			assets->exit->x = x;
 			map->exit++;
-		}
 		else if (map->map[y][x] == 'C')
 		{
 			//se for necessario alocar memoria para o array de coordenadas porque os collectibles serao mais que um

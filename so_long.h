@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/31 18:12:58 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:04:40 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_so_long
 
 void	map_parsing(char *av, t_map *map, t_assets *assets);
 void	row_checker(t_map *map);
-void	map_checker(t_map *map, t_assets *assets);
+void	map_checker(t_map *map);
 void	check_assets(t_map *map, t_assets *assets);
 void	floodfill(t_map *map, t_assets *assets, int x, int y);
 void	ft_error(int panic);
