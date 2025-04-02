@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:00:01 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/31 16:04:26 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:10:29 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,12 @@ int	ft_strcharcmp(const char s1, const char *s2, size_t n)
 	return ((unsigned char)s1 - (unsigned char)s2[i]);
 }
 
-/* void	initialize_struct(t_so_long *slong)
+size_t	ft_linelen(char *str)
 {
-	slong{0};
-} */
+	size_t	idx;
+
+	idx = 0;
+	while (str && str[idx] != '\0' && str[idx] != '\n')
+		idx++;
+	return (idx);
+}

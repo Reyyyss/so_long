@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/01 17:04:40 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:39:48 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,21 @@ typedef struct s_so_long
 }	t_so_long;
 
 
-void	map_parsing(char *av, t_map *map, t_assets *assets);
-void	row_checker(t_map *map);
-void	map_checker(t_map *map);
-void	check_assets(t_map *map, t_assets *assets);
-void	floodfill(t_map *map, t_assets *assets, int x, int y);
-void	ft_error(int panic);
-void	*ft_free(char *str);
-void	increment_assets(t_map *map, t_assets *assets, int x, int y);
-int		ft_strcharcmp(const char s1, const char *s2, size_t n);
-void	map_copy(t_map *map);
+void		map_parsing(char *av, t_map *map, t_assets *assets);
+void		row_checker(t_map *map);
+void		map_checker(t_map *map);
+void		check_assets(t_map *map, t_assets *assets, size_t x, size_t y);
+void		floodfill(t_map *map, t_assets *assets, int x, int y);
+void		ft_error(int panic);
+void		*ft_free(char *str);
+void		increment_assets(t_map *map, t_assets *assets, int x, int y);
+int			ft_strcharcmp(const char s1, const char *s2, size_t n);
+void		map_copy(t_map *map);
+t_cords		*init_cords(int x, int y);
+t_assets	*init_assets(void);
+t_map		*init_map(size_t width, size_t height);
+t_so_long	*init_so_long(size_t width, size_t height);
+t_so_long	*init_game(void);
+size_t		ft_linelen(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:07:18 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/03/26 15:38:27 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:22:20 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int ac, char **av)
 {
 	// void	*mlx;
 	// void	*mlx_win;
-	t_so_long	slong;
+	t_so_long	*slong;
 
 	//initialize_struct();
 	//map_init(&slong.map);
@@ -29,6 +29,7 @@ int	main(int ac, char **av)
 		return (write(2, "Error1\n", 6));
 	if (ft_strncmp(".ber", av[1] + ft_strlen(av[1]) - 4, 4))
 		return (write(2, "Error2\n", 6));
-	map_parsing(av[1], slong.map, slong.ass);
+	slong = init_game();
+	map_parsing(av[1], slong->map, slong->ass);
 }
 
