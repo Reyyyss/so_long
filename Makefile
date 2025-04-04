@@ -6,13 +6,15 @@
 #    By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 11:43:27 by hcarrasq          #+#    #+#              #
-#    Updated: 2025/04/02 12:16:25 by hcarrasq         ###   ########.fr        #
+#    Updated: 2025/04/04 17:45:33 by hcarrasq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+.SILENT:
 NAME = so_long
 
-SRCS_FILES = so_long.c parsing.c flood_fill.c utils.c initialize_structs.c
+SRCS_FILES = so_long.c parsing.c flood_fill.c utils.c initialize_structs.c \
+more_utils.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
@@ -25,7 +27,7 @@ MLX_DIR = ./minilibx-linux
 
 CFLAGS = -g -Wall -Wextra -Werror
 MLX_FLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz 
-CC = cc
+CC = @cc
 
 all:	$(NAME)
 
@@ -37,12 +39,12 @@ $(MLX):
 	make -C $(MLX_DIR)
 
 clean:
-		cd libft && make clean
-		rm -rf $(OBJS)
+		@cd libft && make clean
+		@rm -rf $(OBJS)
 
 fclean:		clean
-		cd libft && make fclean
-		rm -rf $(NAME)
+		@cd libft && make fclean
+		@rm -rf $(NAME)
 
 re:		fclean 	all
 

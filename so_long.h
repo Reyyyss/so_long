@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/03 19:13:31 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:50:49 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_so_long
 	size_t	height;
 	t_map *map;
 	t_assets *ass;
+	void	*mlx;
+	void	*wnd;
 }	t_so_long;
 
 typedef struct	s_data
@@ -89,5 +91,7 @@ t_map		*init_map(size_t width, size_t height);
 t_so_long	*init_so_long(size_t width, size_t height);
 t_so_long	*init_game(void);
 size_t		ft_linelen(char *str);
+int	key_hook(int key_code, t_so_long *slong);
+int	close_wnd(t_so_long *slong);
 
 #endif

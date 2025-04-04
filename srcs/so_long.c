@@ -6,16 +6,22 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:07:18 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/03 18:52:19 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:50:37 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+int	close_wnd(t_so_long *slong)
+{
+	ft_printf("Ate a proxima\n");
+	mlx_destroy_window(slong->mlx, slong->wnd);
+	mlx_destroy_display(slong->mlx);
+	free(slong->mlx);
+	exit (0);
+}
 int	main(int ac, char **av)
 {
-	void	*mlx;
-	void	*mlx_win;
 	t_so_long	*slong;
 
 
@@ -26,9 +32,12 @@ int	main(int ac, char **av)
 	slong = init_game();
 	map_parsing(av[1], slong->map, slong->ass);
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "so_long");
-	mlx_pixel_put(mlx, mlx_win, 128, 128, 0xFF0000);
-	mlx_loop(mlx);
+	slong->mlx = mlx_init();
+	slong->wnd = mlx_new_window(slong->mlx, WIDTH, HEIGHT, "so_long");
+	mlx_pixel_put(slong->mlx, slong->wnd, 128, 128, 0xFF0000);
+	mlx_hook(slong->wnd, 17, 0, close_wnd, slong);
+	mlx_hook(slong->wnd, 2, 1L<<0, key_hook, slong);
+	mlx_loop(slong->mlx);
 }
+
 
