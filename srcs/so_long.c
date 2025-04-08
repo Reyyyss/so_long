@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:07:18 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/04 17:50:37 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:23:33 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ int	main(int ac, char **av)
 	map_parsing(av[1], slong->map, slong->ass);
 
 	slong->mlx = mlx_init();
+	save_imgs(&slong);
 	slong->wnd = mlx_new_window(slong->mlx, WIDTH, HEIGHT, "so_long");
 	mlx_pixel_put(slong->mlx, slong->wnd, 128, 128, 0xFF0000);
 	mlx_hook(slong->wnd, 17, 0, close_wnd, slong);
 	mlx_hook(slong->wnd, 2, 1L<<0, key_hook, slong);
 	mlx_loop(slong->mlx);
+	mlx_xpm_file_to_image();
+	mlx_get_data_addr();
 }
 
 
