@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:08:32 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/02 12:15:31 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:53:44 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ t_cords *init_cords(int x, int y)
 	cords->x = x;
 	cords->y = y;
 	return cords;
+}
+
+t_data *init_data(void)
+{
+	data.img = NULL;
+	data.addr = NULL;
+	data.bits_per_pixel = 0;
+	data.line_length = 0;
+	data.endian = 0;
 }
 
 t_assets *init_assets(void)
@@ -47,10 +56,9 @@ t_map *init_map(size_t width, size_t height)
 t_so_long *init_so_long(size_t width, size_t height)
 {
 	t_so_long *so_long = malloc(sizeof(t_so_long));
-	so_long->width = width;
-	so_long->height = height;
 	so_long->map = init_map(width, height);
 	so_long->ass = init_assets();
+	so_long.
 	return so_long;
 }
 

@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/04 17:50:49 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:09:57 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,14 @@
 # include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
 
-#define WIDTH 500
-#define HEIGHT 500
-
+typedef struct	s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
 
 typedef struct s_cords
 {
@@ -56,24 +61,26 @@ typedef struct s_map
 	int			player;
 }	t_map;
 
+typedef struct s_texture
+{
+	t_data tree;
+	t_data inact_mine;
+	t_data act_mine;
+	t_data gold;
+	t_data player;
+	t_data canva;
+}	t_texture;
+
 typedef struct s_so_long
 {
-	size_t	width;
-	size_t	height;
 	t_map *map;
 	t_assets *ass;
+	t_texture *img;
 	void	*mlx;
 	void	*wnd;
 }	t_so_long;
 
-typedef struct	s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
+
 
 void		map_parsing(char *av, t_map *map, t_assets *assets);
 void		row_checker(t_map *map);
@@ -91,7 +98,9 @@ t_map		*init_map(size_t width, size_t height);
 t_so_long	*init_so_long(size_t width, size_t height);
 t_so_long	*init_game(void);
 size_t		ft_linelen(char *str);
-int	key_hook(int key_code, t_so_long *slong);
-int	close_wnd(t_so_long *slong);
+int			key_hook(int key_code, t_so_long *slong);
+int			close_wnd(t_so_long *slong);
+void		save_imgs(t_so_long *slong);
+t_data		load_imgs(char *path, t_so_long *slong);
 
 #endif
