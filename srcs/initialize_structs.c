@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_structs.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:08:32 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/10 18:53:44 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/13 12:38:45 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,43 @@ t_cords *init_cords(int x, int y)
 	return cords;
 }
 
-t_data *init_data(void)
+t_texture *init_texture(void)
 {
+	t_texture *tex;
+
+	tex = malloc(sizeof(t_texture));
+	tex->tree = init_empty_data();
+	tex->inact_mine = init_empty_data();
+	tex->act_mine = init_empty_data();
+	tex->gold = init_empty_data();
+	tex->player = init_empty_data();
+	tex->canva = init_empty_data();
+
+	return tex;
+}
+t_data init_empty_data(void)
+{
+	t_data data;
+
 	data.img = NULL;
 	data.addr = NULL;
 	data.bits_per_pixel = 0;
 	data.line_length = 0;
 	data.endian = 0;
+	return data;
+}
+
+t_data *init_data(void)
+{
+	t_data *data;
+	
+	data = malloc(sizeof(t_data));
+	data->img = NULL;
+	data->addr = NULL;
+	data->bits_per_pixel = 0;
+	data->line_length = 0;
+	data->endian = 0;
+	return (data);
 }
 
 t_assets *init_assets(void)
@@ -58,7 +88,8 @@ t_so_long *init_so_long(size_t width, size_t height)
 	t_so_long *so_long = malloc(sizeof(t_so_long));
 	so_long->map = init_map(width, height);
 	so_long->ass = init_assets();
-	so_long.
+	so_long->data = init_data();
+	so_long->img = init_texture();
 	return so_long;
 }
 

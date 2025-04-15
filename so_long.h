@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/10 18:09:57 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/13 17:32:47 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_so_long
 	t_map *map;
 	t_assets *ass;
 	t_texture *img;
+	t_data *data;
 	void	*mlx;
 	void	*wnd;
 }	t_so_long;
@@ -96,9 +97,14 @@ t_cords		*init_cords(int x, int y);
 t_assets	*init_assets(void);
 t_map		*init_map(size_t width, size_t height);
 t_so_long	*init_so_long(size_t width, size_t height);
+t_texture 	*init_texture(void);
+t_data 		init_empty_data(void);
 t_so_long	*init_game(void);
+t_data		*init_data(void);
 size_t		ft_linelen(char *str);
 int			key_hook(int key_code, t_so_long *slong);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		my_mlx_pixel_get(t_data *data, int x, int y, int color);
 int			close_wnd(t_so_long *slong);
 void		save_imgs(t_so_long *slong);
 t_data		load_imgs(char *path, t_so_long *slong);
