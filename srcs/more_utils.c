@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:40:23 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/13 17:36:08 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/04/15 14:44:17 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	save_imgs(t_so_long *slong)
 {
 	slong->img->canva.img = mlx_new_image(slong->mlx, slong->map->width, slong->map->height);
 	slong->img->act_mine = load_imgs("./textures/Active_Mine.xpm", slong);
+	slong->img->floor = load_imgs("./textures/Floor.xpm", slong);
 	slong->img->inact_mine = load_imgs("./textures/Inactive_Mine.xpm", slong);
 	slong->img->tree = load_imgs("./textures/Player.xpm", slong);
 	slong->img->player = load_imgs("./textures/tree.xpm", slong);
@@ -38,13 +39,18 @@ void	save_imgs(t_so_long *slong)
 t_data	load_imgs(char *path, t_so_long *slong)
 {
 	t_data	img;
+	int	height;
+	int	width;
 
-	
-	printf("HERE:PREV\n");
-	img.img = mlx_xpm_file_to_image(slong->mlx, path, (int *)&slong->map->width, (int *)&slong->map->height);
-	printf("HERE:%p:%s\n", img.img, path);
+	width = 0;
+	height = 0;
+	img.img = mlx_xpm_file_to_image(slong->mlx, path, &width, &height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, 
 					&img.endian);
-	printf("HEREPOs\n");
 	return (img);
 }
+
+/* void	handler()
+{
+	
+} */

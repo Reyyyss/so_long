@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:07:18 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/13 12:41:16 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/04/15 16:16:26 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	main(int ac, char **av)
 
 	slong->mlx = mlx_init();
 	save_imgs(slong);
-	slong->wnd = mlx_new_window(slong->mlx, slong->map->width, slong->map->height, "so_long");
+	map_drawer(slong->map, slong->img);
+	slong->wnd = mlx_new_window(slong->mlx, slong->map->width * 64, slong->map->height * 64, "so_long");
 	mlx_hook(slong->wnd, 17, 0, close_wnd, slong);
 	mlx_hook(slong->wnd, 2, 1L<<0, key_hook, slong);
 	mlx_loop(slong->mlx);

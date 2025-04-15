@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:49:53 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/02 17:40:02 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:14:04 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ void	map_parsing(char *av, t_map *map, t_assets *assets)
 	map_copy(map);
 	map_checker(map); // largura = 30 e altura = 16 (maximos)
 	check_assets(map, assets, 0, 0);
-	floodfill(map, assets, assets->player->x, assets->player->y);
+	printf("%s\n", map->map[1]);
+	floodfill(map->map_copied, assets, assets->player->x, assets->player->y);
+	printf("%s\n", map->map[1]);
 	if (assets->exit_reachable != 1 || assets->collectibles_found != map->collectible)
 		ft_error(9);
 	close(map->map_fd);
@@ -115,18 +117,20 @@ void	map_copy(t_map *map)
 	y = 0;
 	row = get_next_line(map->map_fd);
 	map->map = malloc(map->height * sizeof(char *));
+	map->map_copied = malloc(map->height * sizeof(char *));
 	if (!map->map)
 		return;
 	while (y < map->height)
 	{
-		map->map[y] = row;
+		map->map[y] = ft_strdup(row);
+		map->map_copied[y] = ft_strdup(row);
 		row = get_next_line(map->map_fd);
 		y++;
 	}
 	y = 0;
 	while (y < map->height)
 	{
-		ft_printf("linha %d: %s", y, map->map[y]);
+		ft_printf("linha %d: %s\n", y, map->map[y]);
 		y++;
 	}
 	ft_printf("\n");

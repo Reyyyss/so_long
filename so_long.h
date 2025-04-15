@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/13 17:32:47 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/04/15 17:21:33 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_assets
 typedef struct s_map
 {
 	char		**map;
+	char		**map_copied;
 	int			map_fd;
 	int			error;
 	size_t		width;
@@ -64,6 +65,7 @@ typedef struct s_map
 typedef struct s_texture
 {
 	t_data tree;
+	t_data floor;
 	t_data inact_mine;
 	t_data act_mine;
 	t_data gold;
@@ -87,7 +89,7 @@ void		map_parsing(char *av, t_map *map, t_assets *assets);
 void		row_checker(t_map *map);
 void		map_checker(t_map *map);
 void		check_assets(t_map *map, t_assets *assets, size_t x, size_t y);
-void		floodfill(t_map *map, t_assets *assets, int x, int y);
+void		floodfill(char **map_copied, t_assets *assets, int x, int y);
 void		ft_error(int panic);
 void		*ft_free(char *str);
 void		increment_assets(t_map *map, t_assets *assets, int x, int y);
@@ -104,9 +106,11 @@ t_data		*init_data(void);
 size_t		ft_linelen(char *str);
 int			key_hook(int key_code, t_so_long *slong);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void		my_mlx_pixel_get(t_data *data, int x, int y, int color);
+int			my_mlx_pixel_get(t_data *data, int x, int y);
 int			close_wnd(t_so_long *slong);
 void		save_imgs(t_so_long *slong);
 t_data		load_imgs(char *path, t_so_long *slong);
+void		map_drawer(t_map *map, t_texture *img);
+void		draw(t_data src, t_data dst, int x, int y);
 
 #endif
