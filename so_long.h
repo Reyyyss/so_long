@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/15 17:21:33 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/15 19:31:17 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ void		save_imgs(t_so_long *slong);
 t_data		load_imgs(char *path, t_so_long *slong);
 void		map_drawer(t_map *map, t_texture *img);
 void		draw(t_data src, t_data dst, int x, int y);
+void		print_data(t_data data);
 
 #endif

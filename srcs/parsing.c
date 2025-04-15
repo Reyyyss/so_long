@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:49:53 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/15 16:14:04 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:56:08 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	row_checker(t_map *map)
 	while (row && row != NULL)
 	{
 		map->height++;
-		ft_printf("%s\n", row);
 		free(row);
 		row = get_next_line(map->map_fd);
 		if (ft_linelen(row) != map->width && ft_linelen(row) > 0)
@@ -129,9 +128,6 @@ void	map_copy(t_map *map)
 	}
 	y = 0;
 	while (y < map->height)
-	{
-		ft_printf("linha %d: %s\n", y, map->map[y]);
 		y++;
-	}
 	ft_printf("\n");
 }

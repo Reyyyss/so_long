@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:40:23 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/15 14:44:17 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/15 19:46:34 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	key_hook(int key_code, t_so_long *slong)
 
 void	save_imgs(t_so_long *slong)
 {
-	slong->img->canva.img = mlx_new_image(slong->mlx, slong->map->width, slong->map->height);
+	slong->img->canva.img = mlx_new_image(slong->mlx, slong->map->width * 64, slong->map->height * 64);
 	slong->img->act_mine = load_imgs("./textures/Active_Mine.xpm", slong);
 	slong->img->floor = load_imgs("./textures/Floor.xpm", slong);
 	slong->img->inact_mine = load_imgs("./textures/Inactive_Mine.xpm", slong);
-	slong->img->tree = load_imgs("./textures/Player.xpm", slong);
-	slong->img->player = load_imgs("./textures/tree.xpm", slong);
+	slong->img->tree = load_imgs("./textures/tree.xpm", slong);
+	slong->img->player = load_imgs("./textures/Player.xpm", slong);
 	slong->img->gold = load_imgs("./textures/Gold.xpm", slong);
 	slong->img->canva.addr = mlx_get_data_addr(slong->img->canva.img,
 	 						&slong->img->canva.bits_per_pixel, &slong->img->canva.line_length,
@@ -48,6 +48,14 @@ t_data	load_imgs(char *path, t_so_long *slong)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, 
 					&img.endian);
 	return (img);
+}
+void	print_data(t_data data)
+{
+	printf("Image Pointer    : %p\n", data.img);
+	printf("Address          : %p\n", (void *)data.addr);
+	printf("Bits Per Pixel   : %d\n", data.bits_per_pixel);
+	printf("Line Length      : %d\n", data.line_length);
+	printf("Endian           : %d\n", data.endian);
 }
 
 /* void	handler()
