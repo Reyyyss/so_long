@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/15 19:31:17 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:50:58 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <stddef.h>
 # include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
+# include <X11/keysym.h>
 
 typedef struct	s_data
 {
@@ -112,6 +113,9 @@ void		save_imgs(t_so_long *slong);
 t_data		load_imgs(char *path, t_so_long *slong);
 void		map_drawer(t_map *map, t_texture *img);
 void		draw(t_data src, t_data dst, int x, int y);
-void		print_data(t_data data);
+void		free_everything(t_so_long *slong);
+int			handler(int keycode, t_so_long *slong);
+void		player_handler(t_so_long *slong, int keycode);
+void		run_game(t_so_long *slong);
 
 #endif

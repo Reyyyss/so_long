@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:00:01 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/15 15:51:17 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:24:34 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void increment_assets(t_map *map, t_assets *assets, int x, int y)
 	//para saber oque incrementar
 	assets->player->x = x;
 	assets->player->y = y;
+	printf("%d\n", assets->player->y);
+	printf("%d\n", assets->player->x);
 	map->player++;
 }
 

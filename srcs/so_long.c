@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:07:18 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/15 19:37:35 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:11:16 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	close_wnd(t_so_long *slong)
 	ft_printf("Ate a proxima\n");
 	mlx_destroy_window(slong->mlx, slong->wnd);
 	mlx_destroy_display(slong->mlx);
-	free(slong->mlx);
+	free_everything(slong);
 	exit (0);
 }
 int	main(int ac, char **av)
@@ -35,11 +35,10 @@ int	main(int ac, char **av)
 	slong->mlx = mlx_init();
 	save_imgs(slong);
 	map_drawer(slong->map, slong->img);
-	print_data(slong->img->canva);
 	slong->wnd = mlx_new_window(slong->mlx, slong->map->width * 64, slong->map->height * 64, "so_long");
 	mlx_put_image_to_window(slong->mlx, slong->wnd, slong->img->canva.img, 0, 0);
+	mlx_key_hook(slong->wnd, handler, slong);
 	mlx_hook(slong->wnd, 17, 0, close_wnd, slong);
-	mlx_hook(slong->wnd, 2, 1L<<0, key_hook, slong);
 	mlx_loop(slong->mlx);
 }
 

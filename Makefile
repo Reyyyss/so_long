@@ -6,7 +6,7 @@
 #    By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 11:43:27 by hcarrasq          #+#    #+#              #
-#    Updated: 2025/04/15 14:47:34 by hcarrasq         ###   ########.fr        #
+#    Updated: 2025/04/16 12:39:38 by hcarrasq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = so_long
 
 SRCS_FILES = so_long.c parsing.c flood_fill.c utils.c initialize_structs.c \
-more_utils.c draw.c
+more_utils.c draw.c handle.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 

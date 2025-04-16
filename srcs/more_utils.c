@@ -6,19 +6,12 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:40:23 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/15 19:46:34 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:39:13 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	key_hook(int key_code, t_so_long *slong)
-{
-	if (key_code == 65307)
-		close_wnd(slong);
-	ft_printf("%d\n", key_code);
-	return (0);
-}
 
 void	save_imgs(t_so_long *slong)
 {
@@ -34,7 +27,37 @@ void	save_imgs(t_so_long *slong)
 							&slong->img->canva.endian);
 }
 
+void	free_everything(t_so_long *slong)
+{
+	size_t	i;
 
+	i = -1;
+	if (slong->map)
+	{
+		if (slong->map->map)
+		{
+			while (++i < slong->map->height)
+			{
+				free(slong->map->map[i]);
+				free(slong->map->map_copied[i]);
+			}
+			free(slong->map->map);
+			free(slong->map->map_copied);
+		}
+		free(slong->map);
+	}
+	if (slong->ass)
+	{
+		if (slong->ass->player)
+			free(slong->ass->player);
+		free(slong->ass);
+	}
+	if (slong->data)
+		free(slong->data);
+	if (slong->img)
+		free(slong->img);
+	free(slong);
+}
 
 t_data	load_imgs(char *path, t_so_long *slong)
 {
@@ -49,16 +72,3 @@ t_data	load_imgs(char *path, t_so_long *slong)
 					&img.endian);
 	return (img);
 }
-void	print_data(t_data data)
-{
-	printf("Image Pointer    : %p\n", data.img);
-	printf("Address          : %p\n", (void *)data.addr);
-	printf("Bits Per Pixel   : %d\n", data.bits_per_pixel);
-	printf("Line Length      : %d\n", data.line_length);
-	printf("Endian           : %d\n", data.endian);
-}
-
-/* void	handler()
-{
-	
-} */
