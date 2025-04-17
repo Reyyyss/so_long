@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:40:23 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/16 12:39:13 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:11:42 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,22 @@ t_data	load_imgs(char *path, t_so_long *slong)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, 
 					&img.endian);
 	return (img);
+}
+
+
+void	print_map(t_map *map)
+{
+	if (!map || !map->map)
+	{
+		printf("Map is NULL or not loaded.\n");
+		return;
+	}
+
+	for (size_t i = 0; i < map->height; i++)
+	{
+		if (map->map[i])
+			printf("%s", map->map[i]);
+		else
+			printf("(null row)\n");
+	}
 }

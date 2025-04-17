@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:00:01 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/16 17:24:34 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:24:06 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,18 @@ void	*ft_free(char *str)
 
 void increment_assets(t_map *map, t_assets *assets, int x, int y)
 {
-	//se for meter o resto dos assets aqui preciso mandar para aqui uma flag
-	//para saber oque incrementar
-	assets->player->x = x;
-	assets->player->y = y;
-	printf("%d\n", assets->player->y);
-	printf("%d\n", assets->player->x);
-	map->player++;
+	if (map->map[y][x] == 'P')
+	{
+		assets->player->x = x;
+		assets->player->y = y;
+		map->player++;
+	}
+	else if (map->map[y][x] == 'P')
+	{
+		assets->exit->x = x;
+		assets->exit->y = y;
+		map->exit++;
+	}
 }
 
 int	ft_strcharcmp(const char s1, const char *s2, size_t n)

@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:35:31 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/16 17:52:22 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:33:18 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,30 @@ void	player_handler(t_so_long *slong, int keycode)
 	}
 }
 
-/* void	collectible_handler()
+void	collectible_handler(t_so_long *slong)
 {
-	
-} */
+	size_t	y;
+	size_t	x;
+	int	c;
+
+	y = 0;
+	c = 0;
+	while (y < slong->map->height)
+	{
+		x = 0;
+		while (x < slong->map->width)
+		{
+			if (slong->map->map[y][x] == 'C')
+				c++;
+			x++;
+		}
+		y++;
+	}
+	if (c == 0)
+	{
+		game_over()
+	}
+}
 
 void	run_game(t_so_long *slong)
 {
@@ -70,7 +90,7 @@ void	run_game(t_so_long *slong)
 		while (x < slong->map->width)
 		{
 			if (slong->map->map[y][x] == 'P')
-				mlx_put_image_to_window(slong->mlx, slong->wnd, slong->img->player.img, 500, 500);
+				mlx_put_image_to_window(slong->mlx, slong->wnd, slong->img->player.img, slong->ass->player->x * 64, slong->ass->player->y * 64);
 			x++;
 		}
 		y++;

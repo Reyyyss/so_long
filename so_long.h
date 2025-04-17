@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/16 16:50:58 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:23:12 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include "libft/libft.h"
 # include <X11/keysym.h>
 
+# define TRANSPARENT 0xFF000000
+
 typedef struct	s_data
 {
 	void	*img;
@@ -46,6 +48,7 @@ typedef struct s_assets
 {
 	int	exit_reachable;
 	int	collectibles_found;
+	t_cords	*exit;
 	t_cords *player;
 }	t_assets;
 
@@ -117,5 +120,6 @@ void		free_everything(t_so_long *slong);
 int			handler(int keycode, t_so_long *slong);
 void		player_handler(t_so_long *slong, int keycode);
 void		run_game(t_so_long *slong);
+void		print_map(t_map *map);
 
 #endif
