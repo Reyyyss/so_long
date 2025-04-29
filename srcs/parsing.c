@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:49:53 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/17 13:07:53 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/19 19:09:54 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	check_assets(t_map *map, t_assets *assets, size_t x, size_t y)
 			if (map->map[y][x] == 'P')
 				increment_assets(map, assets, x, y);
 			else if (map->map[y][x] == 'E')
-				map->exit++;
+				increment_assets(map, assets, x, y);
 			else if (map->map[y][x] == 'C')
 				map->collectible++;
 			else if (map->map[y][x] == '1' || map->map[y][x] == '0')

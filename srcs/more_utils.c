@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:40:23 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/17 13:11:42 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/29 02:43:31 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 void	save_imgs(t_so_long *slong)
 {
-	slong->img->canva.img = mlx_new_image(slong->mlx, slong->map->width * 64, slong->map->height * 64);
+	slong->img->canva.img = mlx_new_image(slong->mlx, slong->map->width * 64,
+							 slong->map->height * 64);
 	slong->img->act_mine = load_imgs("./textures/Active_Mine.xpm", slong);
 	slong->img->floor = load_imgs("./textures/Floor.xpm", slong);
 	slong->img->inact_mine = load_imgs("./textures/Inactive_Mine.xpm", slong);
@@ -23,7 +24,8 @@ void	save_imgs(t_so_long *slong)
 	slong->img->player = load_imgs("./textures/Player.xpm", slong);
 	slong->img->gold = load_imgs("./textures/Gold.xpm", slong);
 	slong->img->canva.addr = mlx_get_data_addr(slong->img->canva.img,
-	 						&slong->img->canva.bits_per_pixel, &slong->img->canva.line_length,
+	 						&slong->img->canva.bits_per_pixel,
+							 &slong->img->canva.line_length,
 							&slong->img->canva.endian);
 }
 
@@ -46,16 +48,7 @@ void	free_everything(t_so_long *slong)
 		}
 		free(slong->map);
 	}
-	if (slong->ass)
-	{
-		if (slong->ass->player)
-			free(slong->ass->player);
-		free(slong->ass);
-	}
-	if (slong->data)
-		free(slong->data);
-	if (slong->img)
-		free(slong->img);
+	free_so_long(slong);
 	free(slong);
 }
 
@@ -73,20 +66,91 @@ t_data	load_imgs(char *path, t_so_long *slong)
 	return (img);
 }
 
-
-void	print_map(t_map *map)
+void	game_over(t_so_long *slong)
 {
-	if (!map || !map->map)
-	{
-		printf("Map is NULL or not loaded.\n");
-		return;
-	}
+	size_t	x;
+	size_t	y;
 
-	for (size_t i = 0; i < map->height; i++)
+	y = 0;
+	mlx_put_image_to_window(slong->mlx, slong->wnd, slong->img->act_mine.img, 
+	slong->ass->exit->x * 64, slong->ass->exit->y * 64);
+	while (y < slong->map->height)
 	{
-		if (map->map[i])
-			printf("%s", map->map[i]);
-		else
-			printf("(null row)\n");
+		x = 0;
+		while (x < slong->map->width)
+		{
+			if (slong->ass->player->x == slong->ass->exit->x 
+			&& slong->ass->player->y == slong->ass->exit->y)
+				close_wnd(slong);
+			x++;
+		}
+		y++;
 	}
+}
+
+void	movement_handle(t_so_long *slong, int keycode)
+{
+	if (keycode == XK_w)
+	{
+		slong->map->map[slong->ass->player->y][slong->ass->player->x] = '0';
+		slong->ass->player->y--;
+		slong->map->map[slong->ass->player->y][slong->ass->player->x] = 'P';
+	}
+	if (keycode == XK_s)
+	{
+		slong->map->map[slong->ass->player->y][slong->ass->player->x] = '0';
+		slong->ass->player->y++;
+		slong->map->map[slong->ass->player->y][slong->ass->player->x] = 'P';
+	}
+	if (keycode == XK_d)
+	{
+		slong->map->map[slong->ass->player->y][slong->ass->player->x] = '0';
+		slong->ass->player->x++;
+		slong->map->map[slong->ass->player->y][slong->ass->player->x] = 'P';
+	}
+	if (keycode == XK_a)
+	{
+		slong->map->map[slong->ass->player->y][slong->ass->player->x] = '0';
+		slong->ass->player->x--;
+		slong->map->map[slong->ass->player->y][slong->ass->player->x] = 'P';
+	}
+}
+
+void free_cords(t_cords *cords) {
+    if (cords) {
+        free(cords);
+    }
+}
+
+void free_data(t_data *data) {
+    if (data) {
+        // If img was created with mlx functions, you might need to destroy it first
+        // e.g., if (data->img) mlx_destroy_image(mlx_ptr, data->img);
+        free(data);
+    }
+}
+
+void free_texture(t_texture *tex) {
+    if (tex) {
+        // The t_data members in texture are not pointers (they're direct structs)
+        // so we don't need to free them, just the texture container
+        free(tex);
+    }
+}
+
+void free_assets(t_assets *assets) {
+    if (assets) {
+        if (assets->exit) free_cords(assets->exit);
+        if (assets->player) free_cords(assets->player);
+        free(assets);
+    }
+}
+
+void free_so_long(t_so_long *so_long) {
+    if (so_long) {
+        if (so_long->ass) free_assets(so_long->ass);
+        if (so_long->data) free_data(so_long->data);
+        if (so_long->img) free_texture(so_long->img);
+        free(so_long);
+    }
 }

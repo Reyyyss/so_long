@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/17 16:23:12 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/29 02:43:24 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,14 @@ int			handler(int keycode, t_so_long *slong);
 void		player_handler(t_so_long *slong, int keycode);
 void		run_game(t_so_long *slong);
 void		print_map(t_map *map);
+void		put_collectible(t_so_long *slong);
+void		collectible_handler(t_so_long *slong);
+void		movement_handle(t_so_long *slong, int keycode);
+void		game_over(t_so_long *slong);
+void 		free_cords(t_cords *cords);
+void 		free_data(t_data *data);
+void 		free_texture(t_texture *tex);
+void 		free_assets(t_assets *assets);
+void 		free_so_long(t_so_long *so_long);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:00:01 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/17 16:24:06 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/19 19:10:22 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void increment_assets(t_map *map, t_assets *assets, int x, int y)
 		assets->player->y = y;
 		map->player++;
 	}
-	else if (map->map[y][x] == 'P')
+	else if (map->map[y][x] == 'E')
 	{
 		assets->exit->x = x;
 		assets->exit->y = y;

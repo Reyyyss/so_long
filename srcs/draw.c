@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 17:35:56 by henrique-re       #+#    #+#             */
-/*   Updated: 2025/04/16 14:51:41 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/29 01:48:46 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	draw(t_data src, t_data dst, int x, int y)
 {
 	int	x_pixel;
 	int	y_pixel;
+	unsigned int	color;
 
 	y_pixel = 0;
 	while (y_pixel < 64)
@@ -39,7 +40,9 @@ void	draw(t_data src, t_data dst, int x, int y)
 		x_pixel = 0;
 		while (x_pixel < 64)
 		{
-			my_mlx_pixel_put(&dst, x_pixel + x, y_pixel + y, my_mlx_pixel_get(&src, x_pixel, y_pixel));
+			color = my_mlx_pixel_get(&src, x_pixel, y_pixel);
+			if (color != TRANSPARENT)
+				my_mlx_pixel_put(&dst, x_pixel + x, y_pixel + y, color);
 			x_pixel++;
 		}
 		y_pixel++;
@@ -60,10 +63,13 @@ void	map_drawer(t_map *map, t_texture *img)
 			if (map->map[y][x] == '1')
 				draw(img->tree, img->canva, x * 64, y * 64);
 			else if (map->map[y][x] == '0' || map->map[y][x] == 'P'
-				|| map->map[y][x] == 'C' || map->map[y][x] == 'E')
+				|| map->map[y][x] == 'C')
 				draw(img->floor, img->canva, x * 64, y * 64);
+			else if (map->map[y][x] == 'E')
+				draw(img->inact_mine, img->canva, x * 64, y * 64);
 			x++;
 		}
 		y++;
 	}
+
 }

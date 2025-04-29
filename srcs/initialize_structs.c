@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_structs.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:08:32 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/15 16:35:07 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/04/29 02:37:45 by henrique-re      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_assets *init_assets(void)
 	t_assets *assets = malloc(sizeof(t_assets));
 	assets->exit_reachable = 0;
 	assets->collectibles_found = 0;
+	assets->exit = init_cords(0, 0);
 	assets->player = init_cords(0, 0);
 	return assets;
 }
