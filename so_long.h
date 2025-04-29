@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/29 02:43:24 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/04/29 16:46:12 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ typedef struct s_so_long
 
 
 
-void		map_parsing(char *av, t_map *map, t_assets *assets);
+void		map_parsing(char *av, t_map *map, t_assets *assets, t_so_long *slong);
 void		row_checker(t_map *map);
 void		map_checker(t_map *map);
 void		check_assets(t_map *map, t_assets *assets, size_t x, size_t y);
 void		floodfill(char **map_copied, t_assets *assets, int x, int y);
-void		ft_error(int panic);
+void		ft_error(int panic, t_so_long *slong);
 void		*ft_free(char *str);
 void		increment_assets(t_map *map, t_assets *assets, int x, int y);
 int			ft_strcharcmp(const char s1, const char *s2, size_t n);

@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:00:01 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/19 19:10:22 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/04/29 16:44:08 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	ft_error(int panic)
+void	ft_error(int panic, t_so_long *slong);
 {
 	// ft_free(row);
+	free_everything(slong);
 	ft_printf("Error: %i\n", panic);
 	exit (panic);
 }

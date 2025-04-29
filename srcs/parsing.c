@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:49:53 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/19 19:09:54 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/04/29 16:47:35 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	map_parsing(char *av, t_map *map, t_assets *assets)
+void	map_parsing(char *av, t_map *map, t_assets *assets, t_so_long *slong)
 {
 	//ft_printf("%s", av);
 	map->map_fd = open(av, O_RDONLY);
@@ -21,26 +21,26 @@ void	map_parsing(char *av, t_map *map, t_assets *assets)
 		close(map->map_fd);
 		return;
 	}
-	row_checker(map);
+	row_checker(map, slong);
 	if (map->height < 3 || map->width < 3)
-		ft_error(3); // 3 = map dont have enough space
+		ft_error(3, slong); // 3 = map dont have enough space
 	map->map_fd = open(av, O_RDONLY);
-	map_copy(map);
-	map_checker(map); // largura = 30 e altura = 16 (maximos)
-	check_assets(map, assets, 0, 0);
+	map_copy(map, slong);
+	map_checker(map, slong); // largura = 30 e altura = 16 (maximos)
+	check_assets(map, assets, 0, 0, slong);
 	floodfill(map->map_copied, assets, assets->player->x, assets->player->y);
 	if (assets->exit_reachable != 1 || assets->collectibles_found != map->collectible)
-		ft_error(9);
+		ft_error(9, slong);
 	close(map->map_fd);
 }
 
-void	row_checker(t_map *map)
+void	row_checker(t_map *map, t_so_long *slong)
 {
 	char	*row;
 
 	row = get_next_line(map->map_fd);
 	if (!row)
-		ft_error(1); // 1 = the map file has nothing
+		ft_error(1, slong); // 1 = the map file has nothing
 	map->width = ft_linelen(row);
 	map->height = 0;
 	while (row && row != NULL)
@@ -52,33 +52,33 @@ void	row_checker(t_map *map)
 		{
 			free(row);
 			close (map->map_fd);
-			ft_error(2); // 2 = the map is not retangular
+			ft_error(2, slong); // 2 = the map is not retangular
 		}
 	}
 	free(row);
 	close(map->map_fd);
 }
 
-void	map_checker(t_map *map)
+void	map_checker(t_map *map, t_so_long *slong)
 {
 	size_t	y;
 
 	y = 0;
 	if (map->height > 16 || map->width > 30)
-		ft_error(15);
+		ft_error(1, slong);
 	while (y < map->height)
 	{
 		if (ft_strcharcmp('1', map->map[0], map->width) != 0)
-			ft_error(4);// 4 = map not enclosed by walls
+			ft_error(4, slong);// 4 = map not enclosed by walls
 		else if (map->map[y][0] != '1' && map->map[y][map->width] != '1')
-			ft_error(10);
+			ft_error(1, slong);
 		else if (ft_strcharcmp('1', map->map[map->height - 1], map->width) != 0)
-			ft_error(11);
+			ft_error(1, slong);
 		y++;
 	}
 }
 
-void	check_assets(t_map *map, t_assets *assets, size_t x, size_t y)
+void	check_assets(t_map *map, t_assets *assets, size_t x, size_t y, t_so_long *slong)
 {
 	y = -1;
 	while (++y < map->height)
@@ -95,15 +95,15 @@ void	check_assets(t_map *map, t_assets *assets, size_t x, size_t y)
 			else if (map->map[y][x] == '1' || map->map[y][x] == '0')
 				continue;
 			else
-				ft_error(20);
+				ft_error(2, slong);
 		}
 	}
 	if (map->player > 1 || map->player < 1)
-		ft_error(5);
+		ft_error(5, slong);
 	else if (map->exit > 1 || map->exit < 1)
-		ft_error(6);
+		ft_error(6, slong);
 	else if (map->collectible < 1)
-		ft_error(7);
+		ft_error(7, slong);
 }
 
 void	map_copy(t_map *map)
@@ -121,6 +121,7 @@ void	map_copy(t_map *map)
 	{
 		map->map[y] = ft_strdup(row);
 		map->map_copied[y] = ft_strdup(row);
+		free(row);
 		row = get_next_line(map->map_fd);
 		y++;
 	}

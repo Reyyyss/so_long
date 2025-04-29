@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:35:31 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/29 02:28:37 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/04/29 15:45:08 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	handler(int keycode, t_so_long *slong)
 	if (keycode == XK_Escape)
 		close_wnd(slong);
 	printf("%d\n", keycode);
+	mlx_clear_window(slong->mlx, slong->wnd);
 	player_handler(slong, keycode);
 	run_game(slong);
 	collectible_handler(slong);
@@ -77,7 +78,6 @@ void	run_game(t_so_long *slong)
 
 	y = 0;
 	printf("%d\n",slong->ass->player->x);
-	mlx_clear_window(slong->mlx, slong->wnd);
 	mlx_put_image_to_window(slong->mlx, slong->wnd, slong->img->canva.img, 0, 0);
 	while (y < slong->map->height)
 	{

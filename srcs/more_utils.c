@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:40:23 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/29 02:43:31 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/04/29 15:24:13 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	free_everything(t_so_long *slong)
 		free(slong->map);
 	}
 	free_so_long(slong);
-	free(slong);
 }
 
 t_data	load_imgs(char *path, t_so_long *slong)
