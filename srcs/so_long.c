@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:07:18 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/29 17:02:28 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:40:36 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,16 @@ int	main(int ac, char **av)
 	if (ft_strncmp(".ber", av[1] + ft_strlen(av[1]) - 4, 4))
 		return (write(2, "Error2\n", 6));
 	slong = init_game();
-	ft_printf("%%%");
 	map_parsing(av[1], slong->map, slong->ass, slong);
 
-	/* slong->mlx = mlx_init();
+	slong->mlx = mlx_init();
 	save_imgs(slong);
 	map_drawer(slong->map, slong->img);
 	slong->wnd = mlx_new_window(slong->mlx, slong->map->width * 64, slong->map->height * 64, "so_long");
 	run_game(slong);
 	mlx_key_hook(slong->wnd, handler, slong);
 	mlx_hook(slong->wnd, 17, 0, close_wnd, slong);
-	mlx_loop(slong->mlx); */
+	mlx_loop(slong->mlx);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:49:53 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/29 16:47:35 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:35:19 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 void	map_parsing(char *av, t_map *map, t_assets *assets, t_so_long *slong)
 {
-	//ft_printf("%s", av);
 	map->map_fd = open(av, O_RDONLY);
 	if (map->map_fd < 3)
 	{
 		close(map->map_fd);
-		return;
+		ft_error(1, slong);
 	}
 	row_checker(map, slong);
 	if (map->height < 3 || map->width < 3)
 		ft_error(3, slong); // 3 = map dont have enough space
 	map->map_fd = open(av, O_RDONLY);
-	map_copy(map, slong);
+	map_copy(map);
 	map_checker(map, slong); // largura = 30 e altura = 16 (maximos)
-	check_assets(map, assets, 0, 0, slong);
+	check_assets(assets, 0, 0, slong);
 	floodfill(map->map_copied, assets, assets->player->x, assets->player->y);
 	if (assets->exit_reachable != 1 || assets->collectibles_found != map->collectible)
 		ft_error(9, slong);
@@ -78,31 +77,31 @@ void	map_checker(t_map *map, t_so_long *slong)
 	}
 }
 
-void	check_assets(t_map *map, t_assets *assets, size_t x, size_t y, t_so_long *slong)
+void	check_assets(t_assets *assets, size_t x, size_t y, t_so_long *slong)
 {
 	y = -1;
-	while (++y < map->height)
+	while (++y < slong->map->height)
 	{
 		x = -1;
-		while (++x < map->width)
+		while (++x < slong->map->width)
 		{
-			if (map->map[y][x] == 'P')
-				increment_assets(map, assets, x, y);
-			else if (map->map[y][x] == 'E')
-				increment_assets(map, assets, x, y);
-			else if (map->map[y][x] == 'C')
-				map->collectible++;
-			else if (map->map[y][x] == '1' || map->map[y][x] == '0')
+			if (slong->map->map[y][x] == 'P')
+				increment_assets(slong->map, assets, x, y);
+			else if (slong->map->map[y][x] == 'E')
+				increment_assets(slong->map, assets, x, y);
+			else if (slong->map->map[y][x] == 'C')
+				slong->map->collectible++;
+			else if (slong->map->map[y][x] == '1' || slong->map->map[y][x] == '0')
 				continue;
 			else
 				ft_error(2, slong);
 		}
 	}
-	if (map->player > 1 || map->player < 1)
+	if (slong->map->player > 1 || slong->map->player < 1)
 		ft_error(5, slong);
-	else if (map->exit > 1 || map->exit < 1)
+	else if (slong->map->exit > 1 || slong->map->exit < 1)
 		ft_error(6, slong);
-	else if (map->collectible < 1)
+	else if (slong->map->collectible < 1)
 		ft_error(7, slong);
 }
 
@@ -126,4 +125,5 @@ void	map_copy(t_map *map)
 		y++;
 	}
 	free(row);
+	close(map->map_fd);
 }

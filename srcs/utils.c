@@ -6,13 +6,13 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:00:01 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/29 16:44:08 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:27:59 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	ft_error(int panic, t_so_long *slong);
+void	ft_error(int panic, t_so_long *slong)
 {
 	// ft_free(row);
 	free_everything(slong);

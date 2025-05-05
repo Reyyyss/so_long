@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:35:31 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/29 15:45:08 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:41:08 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	handler(int keycode, t_so_long *slong)
 {
 	if (keycode == XK_Escape)
 		close_wnd(slong);
-	printf("%d\n", keycode);
 	mlx_clear_window(slong->mlx, slong->wnd);
 	player_handler(slong, keycode);
 	run_game(slong);
@@ -26,22 +25,30 @@ int	handler(int keycode, t_so_long *slong)
 
 void	player_handler(t_so_long *slong, int keycode)
 {
+	int	movement_counter;
+
+	movement_counter = 0;
 	if (keycode == XK_w && slong->map->map[slong->ass->player->y - 1][slong->ass->player->x] != '1')
 	{
 		movement_handle(slong, keycode);
+		movement_counter++;
 	}
 	if (keycode == XK_s && slong->map->map[slong->ass->player->y + 1][slong->ass->player->x] != '1')
 	{
 		movement_handle(slong, keycode);
+		movement_counter++;
 	}
 	if (keycode == XK_d && slong->map->map[slong->ass->player->y][slong->ass->player->x + 1] != '1')
 	{
 		movement_handle(slong, keycode);
+		movement_counter++;
 	}
 	if (keycode == XK_a && slong->map->map[slong->ass->player->y][slong->ass->player->x - 1] != '1')
 	{
 		movement_handle(slong, keycode);
+		movement_counter++;
 	}
+	ft_printf("Movements: %d\n", movement_counter);
 }
 
 void	collectible_handler(t_so_long *slong)

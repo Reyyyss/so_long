@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/04/29 16:46:12 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:34:09 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # define TRANSPARENT 0xFF000000
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void	*img;
 	char	*addr;
@@ -40,16 +40,16 @@ typedef struct	s_data
 
 typedef struct s_cords
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 }	t_cords;
 
 typedef struct s_assets
 {
-	int	exit_reachable;
-	int	collectibles_found;
+	int		exit_reachable;
+	int		collectibles_found;
 	t_cords	*exit;
-	t_cords *player;
+	t_cords	*player;
 }	t_assets;
 
 typedef struct s_map
@@ -68,31 +68,31 @@ typedef struct s_map
 
 typedef struct s_texture
 {
-	t_data tree;
-	t_data floor;
-	t_data inact_mine;
-	t_data act_mine;
-	t_data gold;
-	t_data player;
-	t_data canva;
+	t_data	tree;
+	t_data	floor;
+	t_data	inact_mine;
+	t_data	act_mine;
+	t_data	gold;
+	t_data	player;
+	t_data	canva;
 }	t_texture;
 
 typedef struct s_so_long
 {
-	t_map *map;
-	t_assets *ass;
-	t_texture *img;
-	t_data *data;
-	void	*mlx;
-	void	*wnd;
+	t_map		*map;
+	t_assets	*ass;
+	t_texture	*img;
+	t_data		*data;
+	void		*mlx;
+	void		*wnd;
 }	t_so_long;
 
-
-
-void		map_parsing(char *av, t_map *map, t_assets *assets, t_so_long *slong);
-void		row_checker(t_map *map);
-void		map_checker(t_map *map);
-void		check_assets(t_map *map, t_assets *assets, size_t x, size_t y);
+void		map_parsing(char *av, t_map *map, t_assets *assets,
+				t_so_long *slong);
+void		row_checker(t_map *map, t_so_long *slong);
+void		map_checker(t_map *map, t_so_long *slong);
+void		check_assets(t_assets *assets, size_t x, size_t y,
+				t_so_long *slong);
 void		floodfill(char **map_copied, t_assets *assets, int x, int y);
 void		ft_error(int panic, t_so_long *slong);
 void		*ft_free(char *str);
@@ -103,8 +103,8 @@ t_cords		*init_cords(int x, int y);
 t_assets	*init_assets(void);
 t_map		*init_map(size_t width, size_t height);
 t_so_long	*init_so_long(size_t width, size_t height);
-t_texture 	*init_texture(void);
-t_data 		init_empty_data(void);
+t_texture	*init_texture(void);
+t_data		init_empty_data(void);
 t_so_long	*init_game(void);
 t_data		*init_data(void);
 size_t		ft_linelen(char *str);
@@ -125,10 +125,10 @@ void		put_collectible(t_so_long *slong);
 void		collectible_handler(t_so_long *slong);
 void		movement_handle(t_so_long *slong, int keycode);
 void		game_over(t_so_long *slong);
-void 		free_cords(t_cords *cords);
-void 		free_data(t_data *data);
-void 		free_texture(t_texture *tex);
-void 		free_assets(t_assets *assets);
-void 		free_so_long(t_so_long *so_long);
+void		free_cords(t_cords *cords);
+void		free_data(t_data *data);
+void		free_texture(t_texture *tex);
+void		free_assets(t_assets *assets);
+void		free_so_long(t_so_long *so_long);
 
 #endif
