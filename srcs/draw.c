@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: henrique-reis <henrique-reis@student.42    +#+  +:+       +#+        */
+/*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 17:35:56 by henrique-re       #+#    #+#             */
-/*   Updated: 2025/04/29 01:48:46 by henrique-re      ###   ########.fr       */
+/*   Updated: 2025/05/06 12:12:33 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 int	my_mlx_pixel_get(t_data *data, int x, int y)
@@ -25,13 +25,13 @@ int	my_mlx_pixel_get(t_data *data, int x, int y)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	return (*(unsigned int*)dst);
+	return (*(unsigned int *)dst);
 }
 
 void	draw(t_data src, t_data dst, int x, int y)
 {
-	int	x_pixel;
-	int	y_pixel;
+	int				x_pixel;
+	int				y_pixel;
 	unsigned int	color;
 
 	y_pixel = 0;
@@ -71,5 +71,4 @@ void	map_drawer(t_map *map, t_texture *img)
 		}
 		y++;
 	}
-
 }

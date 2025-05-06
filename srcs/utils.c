@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:00:01 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/05/05 14:27:59 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:10:11 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_error(int panic, t_so_long *slong)
 {
-	// ft_free(row);
 	free_everything(slong);
 	ft_printf("Error: %i\n", panic);
 	exit (panic);
@@ -25,7 +24,7 @@ void	*ft_free(char *str)
 	return (free(str), NULL);
 }
 
-void increment_assets(t_map *map, t_assets *assets, int x, int y)
+void	increment_assets(t_map *map, t_assets *assets, int x, int y)
 {
 	if (map->map[y][x] == 'P')
 	{

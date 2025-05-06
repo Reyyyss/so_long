@@ -6,7 +6,7 @@
 /*   By: hcarrasq <hcarrasq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:55:08 by hcarrasq          #+#    #+#             */
-/*   Updated: 2025/05/05 17:34:09 by hcarrasq         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:36:39 by hcarrasq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_so_long
 	t_data		*data;
 	void		*mlx;
 	void		*wnd;
+	int			moves;
 }	t_so_long;
 
 void		map_parsing(char *av, t_map *map, t_assets *assets,
